@@ -70,13 +70,13 @@
 		compatible = "gpio-leds";
 		status = "okay";
 		led0 {
-			label = "LED0";
-			gpios = <&gpioj 14 GPIO_ACTIVE_LOW>;
+			label = "LED-Blue";
+			gpios = <&gpiol 15 GPIO_ACTIVE_LOW>;
 		};
-		led1 {
-			label = "LED2";
-			gpios = <&gpioj 15 GPIO_ACTIVE_LOW>;
-		};
+		// led1 {
+		// 	label = "LED2";
+		// 	gpios = <&gpioj 15 GPIO_ACTIVE_LOW>;
+		// };
 	};
 
 	backlight: backlight {
@@ -358,7 +358,7 @@
 };
 
 &can1 {
-	status = "okay";
+	status = "disabled";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_can1>;
 };
