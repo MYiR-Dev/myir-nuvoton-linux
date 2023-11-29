@@ -46,23 +46,24 @@
 		status = "okay";
 		autorepeat;
 		botton0 {
-			label = "Key Down";
+			//label = "Key Down";
+			label = "user key";
 			linux,code = <KEY_DOWN>;
-			gpios = <&gpiod 8 GPIO_ACTIVE_LOW>;
+			gpios = <&gpiok 7 GPIO_ACTIVE_LOW>;
 			wakeup-source;
 		};
-		button1{
-			label ="Key Up";
-			linux,code = <KEY_UP>;
-			gpios = <&gpiod 9 GPIO_ACTIVE_LOW>;
-			wakeup-source;
-		};
-		button2{
-			label ="Key Up";
-			linux,code = <KEY_ENTER>;
-			gpios = <&gpiof 14 GPIO_ACTIVE_LOW>;
-			wakeup-source;
-		};
+		// button1{
+		// 	label ="Key Up";
+		// 	linux,code = <KEY_UP>;
+		// 	gpios = <&gpiod 9 GPIO_ACTIVE_LOW>;
+		// 	wakeup-source;
+		// };
+		// button2{
+		// 	label ="Key Up";
+		// 	linux,code = <KEY_ENTER>;
+		// 	gpios = <&gpiof 14 GPIO_ACTIVE_LOW>;
+		// 	wakeup-source;
+		// };
 	};
 
 	gpio_leds_test {
@@ -84,7 +85,7 @@
 		default-brightness-level = <5>;
 		pwms = <&epwm1 1 50000>;
 		enable-gpios = <&gpiok 7 GPIO_ACTIVE_HIGH>;
-		status = "okay";
+		status = "disabled";
         };
 
 	volt0_sdhci1: regulator-volt0_sdhci1 {
