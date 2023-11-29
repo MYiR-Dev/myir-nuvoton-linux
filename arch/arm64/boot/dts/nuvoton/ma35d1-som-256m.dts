@@ -72,6 +72,8 @@
 		led0 {
 			label = "LED-Blue";
 			gpios = <&gpiol 15 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+			linux,default-trigger = "heartbeat";
 		};
 		// led1 {
 		// 	label = "LED2";
