@@ -307,6 +307,11 @@ config VITESSE_PHY
 	help
 	  Currently supports the vsc8244
 
+config MOTORCOMM_PHY
+    tristate "Motorcomm PHYs"
+    help
+      Supports the YT8010, YT8510, YT8511, YT8512, YT8531 PHYs.
+
 config XILINX_GMII2RGMII
 	tristate "Xilinx GMII2RGMII converter driver"
 	help
