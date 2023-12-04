@@ -304,7 +304,7 @@
 };
 
 &i2s0 {
-	status = "okay";
+	status = "disabled";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2s0>;
 	powerdown-gpios = <&gpiod 13 GPIO_ACTIVE_HIGH>; /* PD13 */
@@ -419,14 +419,26 @@
 	pinctrl-0 = <&pinctrl_uart16>;
 };
 
+&can0 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_can0>;
+};
+
 &can1 {
-	status = "disabled";
+	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_can1>;
 };
 
+&can2 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_can2>;
+};
+
 &can3 {
-	status = "disabled";
+	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_can3>;
 };
@@ -835,19 +847,35 @@
 		};
 	};
 
+	can0 {
+		pinctrl_can0: can0grp{
+			nuvoton,pins =
+				<SYS_GPN_MFPL_PN2MFP_CAN0_RXD	&pcfg_default>,
+				<SYS_GPN_MFPL_PN3MFP_CAN0_TXD	&pcfg_default>;
+		};
+	};
+
 	can1 {
 		pinctrl_can1: can1grp{
 			nuvoton,pins =
-				<SYS_GPL_MFPH_PL14MFP_CAN1_RXD	&pcfg_default>,
-				<SYS_GPL_MFPH_PL15MFP_CAN1_TXD	&pcfg_default>;
+				<SYS_GPN_MFPL_PN6MFP_CAN1_RXD	&pcfg_default>,
+				<SYS_GPN_MFPL_PN7MFP_CAN1_TXD	&pcfg_default>;
+		};
+	};
+
+	can2 {
+		pinctrl_can2: can2grp{
+			nuvoton,pins =
+				<SYS_GPN_MFPH_PN10MFP_CAN2_RXD	&pcfg_default>,
+				<SYS_GPN_MFPH_PN11MFP_CAN2_TXD	&pcfg_default>;
 		};
 	};
 
 	can3 {
 		pinctrl_can3: can3grp{
 			nuvoton,pins =
-				<SYS_GPL_MFPH_PL10MFP_CAN3_RXD	&pcfg_default>,
-				<SYS_GPL_MFPH_PL11MFP_CAN3_TXD	&pcfg_default>;
+				<SYS_GPK_MFPH_PK14MFP_CAN3_RXD	&pcfg_default>,
+				<SYS_GPK_MFPH_PK15MFP_CAN3_TXD	&pcfg_default>;
 		};
 	};
 
