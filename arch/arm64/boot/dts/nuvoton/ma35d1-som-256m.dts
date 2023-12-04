@@ -341,6 +341,42 @@
 	status = "okay";
 };
 
+&uart1 {
+    status = "okay";
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_uart1>;
+};
+
+&uart2 {
+    status = "okay";
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_uart2>;
+};
+
+&uart3 {
+    status = "okay";
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_uart3>;
+};
+
+&uart4 {
+    status = "okay";
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_uart4>;
+};
+
+&uart5 {
+    status = "okay";
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_uart5>;
+};
+
+&uart8 {
+    status = "okay";
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_uart8>;
+};
+
 &uart10 {
     status = "okay";
     pinctrl-names = "default";
@@ -378,7 +414,7 @@
 };
 
 &uart16 {
-	status = "disabled";
+	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart16>;
 };
@@ -689,6 +725,54 @@
 		};
 	};
 
+	uart1 {
+        pinctrl_uart1: uart1grp{
+            nuvoton,pins =
+                <SYS_GPA_MFPL_PA2MFP_UART1_RXD    &pcfg_default>,
+                <SYS_GPA_MFPL_PA3MFP_UART1_TXD    &pcfg_default>;
+        };
+    };
+
+	uart2 {
+        pinctrl_uart2: uart2grp{
+            nuvoton,pins =
+                <SYS_GPA_MFPL_PA4MFP_UART2_RXD    &pcfg_default>,
+                <SYS_GPA_MFPL_PA5MFP_UART2_TXD    &pcfg_default>;
+        };
+    };
+
+	uart3 {
+        pinctrl_uart3: uart3grp{
+            nuvoton,pins =
+                <SYS_GPA_MFPL_PA6MFP_UART3_RXD    &pcfg_default>,
+                <SYS_GPA_MFPL_PA7MFP_UART3_TXD    &pcfg_default>;
+        };
+    };
+
+	uart4 {
+        pinctrl_uart4: uart4grp{
+            nuvoton,pins =
+                <SYS_GPA_MFPH_PA8MFP_UART4_RXD    &pcfg_default>,
+                <SYS_GPA_MFPH_PA9MFP_UART4_TXD    &pcfg_default>;
+        };
+    };
+
+	uart5 {
+        pinctrl_uart5: uart5grp{
+            nuvoton,pins =
+                <SYS_GPA_MFPH_PA10MFP_UART5_RXD    &pcfg_default>,
+                <SYS_GPA_MFPH_PA11MFP_UART5_TXD    &pcfg_default>;
+        };
+    };
+
+	uart8 {
+        pinctrl_uart8: uart8grp{
+            nuvoton,pins =
+                <SYS_GPA_MFPH_PA12MFP_UART8_RXD    &pcfg_default>,
+                <SYS_GPA_MFPH_PA13MFP_UART8_TXD    &pcfg_default>;
+        };
+    };
+
 	uart10 {
         pinctrl_uart10: uart10grp{
             nuvoton,pins =
@@ -746,10 +830,8 @@
 	uart16 {
 		pinctrl_uart16: uart16grp{
 			nuvoton,pins =
-				<SYS_GPK_MFPL_PK0MFP_UART16_nCTS	&pcfg_default>,
-				<SYS_GPK_MFPL_PK1MFP_UART16_nRTS	&pcfg_default>,
-				<SYS_GPK_MFPL_PK2MFP_UART16_RXD		&pcfg_default>,
-				<SYS_GPK_MFPL_PK3MFP_UART16_TXD		&pcfg_default>;
+				<SYS_GPD_MFPH_PD10MFP_UART16_RXD		&pcfg_default>,
+				<SYS_GPD_MFPH_PD11MFP_UART16_TXD		&pcfg_default>;
 		};
 	};
 
