@@ -31,3 +31,4 @@ subdir-y += toshiba
 subdir-y += xilinx
 subdir-y += zte
 subdir-y += nuvoton
+subdir-y += myir 
