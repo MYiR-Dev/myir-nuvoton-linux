@@ -47,7 +47,7 @@
 };
 /*emmc*/
 &sdhci1 {
-	status = "disable";
+	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_sdhci1_3_3V>;
 	max-frequency = <200000000>;
