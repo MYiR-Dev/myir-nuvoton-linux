@@ -74,7 +74,7 @@ static struct snd_soc_ops ma35d1_audio_ops = {
 
 SND_SOC_DAILINK_DEFS(hifi,
 			DAILINK_COMP_ARRAY(COMP_CPU("40480000.i2s")),
-			DAILINK_COMP_ARRAY(COMP_CODEC("nau8822.0-001a", "nau8822-hifi")),
+			DAILINK_COMP_ARRAY(COMP_CODEC("sgtl5000.0-000a", "sgtl5000")),
 			DAILINK_COMP_ARRAY(COMP_PLATFORM("i2s_pcm")));
 
 static struct snd_soc_dai_link ma35d1evb_i2s_dai = {
