@@ -163,11 +163,18 @@
 &ehci0 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_hsusbh>;
+	oc-active-level = <1>;
+	status = "okay";
 };
 
 &usb {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_usb>;
+};
+
+&ehci1 {
+   status = "okay";
+   oc-active-level = <1>;
 };
 
 &nand {
