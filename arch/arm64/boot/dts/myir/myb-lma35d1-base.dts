@@ -208,6 +208,16 @@
 	pinctrl-0 = <&pinctrl_i2c1>;
 	status = "okay";
 
+   ft5x06: ft5x06@38 {
+        compatible = "edt,edt-ft5406", "edt,edt-ft5x06";
+        reg = <0x38>;
+        interrupt-parent = <&gpiol>;
+        interrupts = <14 2>;
+        reset-gpios = <&gpiok 0 GPIO_ACTIVE_LOW>;
+        touchscreen-size-x=<800>;
+        touchscreen-size-y=<480>;
+   };
+
 	sgtl5000: audio-codec@a {
 		compatible = "fsl,sgtl5000";
 		reg = <0xa>;
