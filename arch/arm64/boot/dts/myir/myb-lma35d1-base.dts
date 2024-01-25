@@ -185,6 +185,7 @@
 	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_sdhci0>;
+	wp-gpios = <&gpioc 7 GPIO_ACTIVE_LOW>;
 };
 
 /*eMMC*/
