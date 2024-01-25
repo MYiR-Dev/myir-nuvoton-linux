@@ -443,8 +443,8 @@
 		interrupts = <GIC_SPI 28 IRQ_TYPE_LEVEL_HIGH>;
 		pp_out_enable = "yes";
 		pp_wait_vsync = <0>;  /* timeout(ms) of waiting VSYNC when PP enabled */
-		fb_width = <1024>;
-		fb_height = <600>;
+		fb_width = <800>;
+		fb_height = <480>;
 		fb_fmt = "RGB888";   /* RGB888, RGB565, or YUV420P */
 		use_dev_coherent = <1>;
 		status = "disabled";
@@ -1690,13 +1690,13 @@
 		//Enable overlay function
 		overlay-en = <1>;
 		overlay-pixel-fmt = <6>;
-		overlay-width = <1024>;
-		overlay-height = <600>;
+		overlay-width = <800>;
+		overlay-height = <480>;
 		overlay-rect-tlx = <0>;
 		overlay-rect-tly = <0>;
 
 		display-timings {
-			native-mode = <&timing0>;
+			native-mode = <&timing1>;
 
 			timing0: 1024x600 {
 				clock-frequency = <51000000>;//pixel clock(pixclock)
@@ -1713,7 +1713,7 @@
 			};
 
 			timing1: 800x480 {
-				clock-frequency = <45000000>;
+				clock-frequency = <33000000>;
 				hactive = <800>;
 				vactive = <480>;
 				hsync-len = <1>;

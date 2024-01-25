@@ -83,8 +83,8 @@
 		brightness-levels = <250 225 175 125 75 25>;
 		default-brightness-level = <5>;
 		pwms = <&epwm1 1 50000>;
-		enable-gpios = <&gpiok 7 GPIO_ACTIVE_HIGH>;
-		status = "disabled";
+		enable-gpios = <&gpiok 8 GPIO_ACTIVE_HIGH>;
+		status = "okay";
         };
 
 	volt0_sdhci1: regulator-volt0_sdhci1 {
