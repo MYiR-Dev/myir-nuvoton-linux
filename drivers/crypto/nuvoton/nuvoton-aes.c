@@ -594,6 +594,10 @@ out_ctx:
 
 static void optee_aes_close(struct nu_aes_dev *dd)
 {
+	if((dd == NULL)||(dd->shm_pool == NULL)||(dd->octx == NULL))
+	{
+	           return;
+	}
 	tee_shm_free(dd->shm_pool);
 	tee_client_close_session(dd->octx, dd->session_id);
 	tee_client_close_context(dd->octx);
