@@ -37,6 +37,26 @@
 		};
 	};
 
+
+	regulators {
+			compatible = "simple-bus";
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+		reg_m2_power_pad: regulator1 {
+			compatible = "regulator-fixed";
+			regulator-name = "fixed-3.3V";
+			regulator-min-microvolt = <3300000>;
+			regulator-max-microvolt = <3300000>;
+			regulator-boot-on;
+			regulator-always-on;
+			enable-active-high;
+			gpios = <&gpiob 8 GPIO_ACTIVE_HIGH>;
+		};
+
+	};
+
+
 	reg_3p3v: regulator1 {
 		compatible = "regulator-fixed";
 		regulator-name = "fixed-3.3V";
@@ -222,16 +242,6 @@
 	pinctrl-0 = <&pinctrl_i2c1>;
 	status = "okay";
 
-   ft5x06: ft5x06@38 {
-        compatible = "edt,edt-ft5406", "edt,edt-ft5x06";
-        reg = <0x38>;
-        interrupt-parent = <&gpiol>;
-        interrupts = <14 2>;
-        reset-gpios = <&gpiok 0 GPIO_ACTIVE_LOW>;
-        touchscreen-size-x=<800>;
-        touchscreen-size-y=<480>;
-   };
-
 	sgtl5000: audio-codec@a {
 		compatible = "fsl,sgtl5000";
 		reg = <0xa>;
@@ -293,8 +303,12 @@
 		pinctrl-0 = <&pinctrl_ccap0>;
 		clocks = <&clk CCAP0_GATE>;
 		clock-names = "xclk";
-		powerdown-gpios = <&gpiom 10 (GPIO_ACTIVE_HIGH | GPIO_PUSH_PULL)>;
-		reset-gpios = <&gpiom 11 (GPIO_ACTIVE_LOW | GPIO_PUSH_PULL)>;
+		// powerdown-gpios = <&gpiom 10 (GPIO_ACTIVE_HIGH | GPIO_PUSH_PULL)>;
+		// reset-gpios = <&gpiom 11 (GPIO_ACTIVE_LOW | GPIO_PUSH_PULL)>;
+
+		powerdown-gpios = <&gpiom 3 (GPIO_ACTIVE_HIGH | GPIO_PUSH_PULL)>;
+		reset-gpios = <&gpiom 2 (GPIO_ACTIVE_LOW | GPIO_PUSH_PULL)>;
+
 		status = "okay";
 		port {
 			ov5640_0: endpoint {
@@ -307,6 +321,16 @@
 		};
 	};
 #endif
+
+   ft5x06: ft5x06@38 {
+        compatible = "edt,edt-ft5406";
+        reg = <0x38>;
+        interrupt-parent = <&gpiol>;
+        interrupts = <14 2>;
+        reset-gpios = <&gpiok 0 GPIO_ACTIVE_LOW>;
+        touchscreen-size-x=<800>;
+        touchscreen-size-y=<480>;
+   };
 
 };
 
@@ -695,14 +719,16 @@
 				<SYS_GPK_MFPH_PK10MFP_CCAP0_PIXCLK	&pcfg_default>,
 				<SYS_GPK_MFPH_PK11MFP_CCAP0_HSYNC	&pcfg_default>,
 				<SYS_GPM_MFPL_PM0MFP_CCAP0_VSYNC	&pcfg_default>,
-				<SYS_GPM_MFPL_PM2MFP_CCAP0_DATA0	&pcfg_default>,
-				<SYS_GPM_MFPL_PM3MFP_CCAP0_DATA1	&pcfg_default>,
+				// <SYS_GPM_MFPL_PM2MFP_CCAP0_DATA0	&pcfg_default>,
+				// <SYS_GPM_MFPL_PM3MFP_CCAP0_DATA1	&pcfg_default>,
 				<SYS_GPM_MFPL_PM4MFP_CCAP0_DATA2	&pcfg_default>,
 				<SYS_GPM_MFPL_PM5MFP_CCAP0_DATA3	&pcfg_default>,
 				<SYS_GPM_MFPL_PM6MFP_CCAP0_DATA4	&pcfg_default>,
 				<SYS_GPM_MFPL_PM7MFP_CCAP0_DATA5	&pcfg_default>,
 				<SYS_GPM_MFPH_PM8MFP_CCAP0_DATA6	&pcfg_default>,
-				<SYS_GPM_MFPH_PM9MFP_CCAP0_DATA7	&pcfg_default>;
+				<SYS_GPM_MFPH_PM9MFP_CCAP0_DATA7	&pcfg_default>,
+				<SYS_GPM_MFPH_PM10MFP_CCAP0_DATA8	&pcfg_default>,
+				<SYS_GPM_MFPH_PM11MFP_CCAP0_DATA9	&pcfg_default>;
 		};
 	};
 
