@@ -51,6 +51,9 @@ else
 	src=$(PWD)$(TMP)
 endif
 
+EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
+#EXTRA_CFLAGS += -DCONFIG_SEL_P2P_IFACE=2
+
 CONFIG_AUTOCFG_CP = n
 
 ########################## WIFI IC ############################
