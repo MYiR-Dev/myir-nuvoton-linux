@@ -458,7 +458,7 @@
 		optee_nuvoton = "yes";
 		rsa_ioctl = "yes";           /* yes: RSA via ioctl, no: RSA via akcipher   */
 		ecc_ioctl = "yes";           /* yes: ECC via ioctl, no: ECDH via akcipher */
-		status = "okay";
+		status = "disabled";
 	};
 
 	/* Key Store */
