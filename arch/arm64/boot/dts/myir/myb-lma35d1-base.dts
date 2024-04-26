@@ -100,6 +100,28 @@
 		};
 	};
 
+	panel_powr1: regulator-panel_powr1 {
+		compatible = "regulator-fixed";
+		regulator-name = "panel-power1";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		gpios = <&gpioa 14 GPIO_ACTIVE_HIGH>;
+		enable-active-high;
+		regulator-boot-on;
+		regulator-always-on;
+	};
+
+	panel_powr2: regulator-panel_powr2 {
+		compatible = "regulator-fixed";
+		regulator-name = "panel-power2";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		gpios = <&gpiog 14 GPIO_ACTIVE_HIGH>;
+		enable-active-high;
+		regulator-boot-on;
+		regulator-always-on;
+	};
+
 	backlight: backlight {
 		compatible = "pwm-backlight";
 		brightness-levels = <250 225 175 125 75 25>;
@@ -107,7 +129,7 @@
 		pwms = <&epwm1 1 50000>;
 		enable-gpios = <&gpiok 8 GPIO_ACTIVE_HIGH>;
 		status = "okay";
-        };
+    };
 
 	volt0_sdhci1: regulator-volt0_sdhci1 {
 		compatible = "nuvoton,ma35d1-volt";
@@ -115,7 +137,7 @@
 		regulator-max-microvolt = <3300000>;
 		regulator-name = "volt0_sdhci1";
 		regulator-always-on;
-        };
+    };
 
 	sgtl5000_mclk: sgtl5000-mclk {
 		compatible = "fixed-clock";
@@ -503,7 +525,7 @@
 };
 
 &epwm1 {
-	status = "disabled";
+	status = "okay";
 	#pwm-cells = <2>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_epwm1>;
@@ -944,8 +966,9 @@
 	epwm1 {
 		pinctrl_epwm1: epwm1grp{
 			nuvoton,pins =
-				<SYS_GPK_MFPL_PK5MFP_EPWM1_CH1	&pcfg_default>,
-				<SYS_GPM_MFPH_PM13MFP_EPWM1_CH5	&pcfg_default>;
+				// <SYS_GPK_MFPL_PK5MFP_EPWM1_CH1	&pcfg_default>,
+				// <SYS_GPM_MFPH_PM13MFP_EPWM1_CH5	&pcfg_default>;
+				<SYS_GPK_MFPH_PK8MFP_EPWM1_CH0	&pcfg_default>;
 		};
 	};
 
