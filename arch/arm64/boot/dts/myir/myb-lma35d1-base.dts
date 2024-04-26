@@ -212,8 +212,8 @@
 };
 
 &ehci0 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_hsusbh>;
+	// pinctrl-names = "default";
+	// pinctrl-0 = <&pinctrl_hsusbh>;
 	oc-active-level = <1>;
 	status = "okay";
 };
@@ -554,13 +554,13 @@
 		};
 	};
 
-	hsusbh {
-		pinctrl_hsusbh: hsusbhgrp{
-			nuvoton,pins =
-				<SYS_GPL_MFPH_PL12MFP_HSUSBH_PWREN	&pcfg_default>,
-				<SYS_GPL_MFPH_PL13MFP_HSUSBH_OVC	&pcfg_default>;
-		};
-	};
+	// hsusbh {
+	// 	pinctrl_hsusbh: hsusbhgrp{
+	// 		nuvoton,pins =
+	// 			<SYS_GPL_MFPH_PL12MFP_HSUSBH_PWREN	&pcfg_default>,
+	// 			<SYS_GPL_MFPH_PL13MFP_HSUSBH_OVC	&pcfg_default>;
+	// 	};
+	// };
 
 	// adc0 {
 	// 	pinctrl_adc0: adc0grp {
