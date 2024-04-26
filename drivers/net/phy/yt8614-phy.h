@@ -21,7 +21,7 @@
 
 /* pls dont modify below lines */
 
-#define PHY_ID_YT8614  0x4F51E899 //serdes
+// #define PHY_ID_YT8614  0x4F51E899 //serdes
 #define MOTORCOMM_MPHY_ID_MASK_8614 0xffffffff
 
 #ifndef BOOL
