@@ -163,6 +163,24 @@
 		reg = <0x50>;
 		pagesize = <64>;
 	};
+
+	ptn5150: ptn5150@3d {
+		status = "okay";
+		compatible = "nxp,ptn5150";
+		reg = <0x3d>;
+		pinctrl-names = "default";
+		int-gpios = <&gpiok 5 GPIO_ACTIVE_HIGH>;
+
+		connector {
+			compatible = "usb-c-connector";
+			label = "USB-C";
+			port {
+				con_usbotg_hs_ep: endpoint {
+					remote-endpoint = <&usbotg_hs_ep>;
+				};
+			};
+		};
+	};
 };
 
 &ccap1 {
@@ -264,24 +282,6 @@
 		VDDIO-supply = <&reg_3p3v>;
 		VDDD-supply = <&reg_1p8v>;
 		status = "okay";
-	};
-
-	ptn5150: ptn5150@3d {
-			compatible = "nxp,ptn5150";
-			reg = <0x3d>;
-			pinctrl-names = "default";
-			int-gpios = <&gpiok 5 GPIO_ACTIVE_HIGH>;
-			status = "okay";
-
-			connector {
-					compatible = "usb-c-connector";
-					label = "USB-C";
-					port {
-							con_usbotg_hs_ep: endpoint {
-									remote-endpoint = <&usbotg_hs_ep>;
-							};
-					};
-			};
 	};
 
 #if (OV2659_SUPPORT)
