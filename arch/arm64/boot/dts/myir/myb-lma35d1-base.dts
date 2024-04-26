@@ -37,7 +37,6 @@
 		};
 	};
 
-
 	regulators {
 			compatible = "simple-bus";
 			#address-cells = <1>;
@@ -56,7 +55,6 @@
 
 	};
 
-
 	reg_3p3v: regulator1 {
 		compatible = "regulator-fixed";
 		regulator-name = "fixed-3.3V";
@@ -73,6 +71,10 @@
 		regulator-max-microvolt = <1800000>;
 		regulator-boot-on;
 		regulator-always-on;
+	};
+
+	watchdog {
+		compatible = "gpio-watchdog";
 	};
 
 	gpio_keys_test {

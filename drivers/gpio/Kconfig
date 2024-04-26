@@ -1617,4 +1617,9 @@ config GPIO_MOCKUP
 	  tools/testing/selftests/gpio/gpio-mockup.sh. Reference the usage in
 	  it.
 
+config MYIR_WDT
+	tristate "myir watchdog driver"
+	help
+	  Default reset period set to 400 ms.
+
 endif
