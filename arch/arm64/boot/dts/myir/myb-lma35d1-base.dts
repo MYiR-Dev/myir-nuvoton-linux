@@ -156,6 +156,13 @@
 		compatible = "epson,rx8025t";
 		reg = <0x32>;
     };
+
+	EEPROM:24C32F@50 {
+		status = "okay";
+		compatible = "atmel,24c32";
+		reg = <0x50>;
+		pagesize = <64>;
+	};
 };
 
 &ccap1 {
