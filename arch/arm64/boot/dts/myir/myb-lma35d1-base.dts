@@ -147,9 +147,15 @@
 };
 
 &i2c3 {
-	status = "disabled";
+	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c3>;
+
+	rx8025t: rx8025t@32 {
+		status = "okay";
+		compatible = "epson,rx8025t";
+		reg = <0x32>;
+    };
 };
 
 &ccap1 {
@@ -592,8 +598,8 @@
 	i2c3 {
 		pinctrl_i2c3: i2c3grp{
 			nuvoton,pins =
-				<SYS_GPM_MFPH_PM14MFP_I2C3_SDA	&pcfg_default>,
-				<SYS_GPM_MFPH_PM15MFP_I2C3_SCL	&pcfg_default>;
+				<SYS_GPB_MFPH_PB12MFP_I2C3_SDA	&pcfg_default>,
+				<SYS_GPB_MFPH_PB13MFP_I2C3_SCL	&pcfg_default>;
 		};
 	};
 
