@@ -40,11 +40,13 @@
 	reg = <0x00000000 0x80000000 0 0x10000000>; /* DRAM space - 1, size : 256MB DRAM */
 };
 
+/* SD */
 &sdhci0 {
 	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_sdhci0>;
 };
+
 /*emmc*/
 &sdhci1 {
 	status = "okay";
@@ -54,26 +56,4 @@
 	bus-width = <8>;
 	no-1-8-v;
 	non-removable;
-};
-
-&qspi0 {
-	status = "okay";
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_qspi0>;
-};
-
-&pinctrl {
-
-	qspi0 {
-		pinctrl_qspi0: qspi0grp{
-			nuvoton,pins =
-				<SYS_GPD_MFPL_PD0MFP_QSPI0_SS0		&pcfg_default>,
-				<SYS_GPD_MFPL_PD1MFP_QSPI0_CLK		&pcfg_default>,
-				<SYS_GPD_MFPL_PD2MFP_QSPI0_MOSI0	&pcfg_default>,
-				<SYS_GPD_MFPL_PD3MFP_QSPI0_MISO0	&pcfg_default>,
-				<SYS_GPD_MFPL_PD4MFP_QSPI0_MOSI1	&pcfg_default>,
-				<SYS_GPD_MFPL_PD5MFP_QSPI0_MISO1	&pcfg_default>;
-		};
-	};
-
 };
