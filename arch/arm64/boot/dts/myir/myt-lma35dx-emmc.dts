@@ -43,7 +43,7 @@
 			regulator-boot-on;
 			regulator-always-on;
 			enable-active-high;
-			gpios = <&gpiob 8 GPIO_ACTIVE_HIGH>;
+			// gpios = <&gpiob 8 GPIO_ACTIVE_HIGH>;
 		};
 
 	};
