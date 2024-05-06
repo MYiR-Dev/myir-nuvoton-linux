@@ -66,8 +66,13 @@
 		regulator-always-on;
 	};
 
-	watchdog {
-		compatible = "gpio-watchdog";
+	watchdog: watchdog {
+		// SGM823
+		compatible = "linux,wdt-gpio";
+		gpios = <&gpiol 13 GPIO_ACTIVE_LOW>;
+		hw_algo = "toggle";
+		// always-running;
+		hw_margin_ms = <1600>;
 	};
 
 	gpio_leds_test {
