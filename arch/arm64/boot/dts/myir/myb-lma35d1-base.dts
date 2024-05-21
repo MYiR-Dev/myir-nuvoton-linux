@@ -267,6 +267,7 @@
 	status = "disabled";
 };
 
+/* SD */
 &sdhci0 {
 	status = "okay";
 	pinctrl-names = "default";
@@ -275,15 +276,21 @@
 };
 
 /*eMMC*/
-// &sdhci1 {
-// 	status = "okay";
-// 	pinctrl-names = "default";
-// 	pinctrl-0 = <&pinctrl_sdhci1_3_3V>;
-// 	max-frequency = <200000000>;
-// 	bus-width = <8>;
-// 	no-1-8-v;
-// 	non-removable;
-// };
+&sdhci1 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_sdhci1_3_3V>;
+	max-frequency = <200000000>;
+	bus-width = <8>;
+	no-1-8-v;
+	non-removable;
+};
+
+&qspi0 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_qspi0>;
+};
 
 // &adc0 {
 // 	status = "okay";
