@@ -2064,7 +2064,6 @@ static int btusb_probe(struct usb_interface *intf,
 	register_reboot_notifier(&data->shutdown_notifier);
 #ifdef BTCOEX
 	rtk_btcoex_probe(hdev);
-	printk("alex 99\n");
 #endif
 
 	RTKBT_DBG("%s: done", __func__);
