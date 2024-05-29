@@ -6,7 +6,7 @@
 
 /dts-v1/;
 
-#include "myt-lma35dx-base.dts"
+#include "ma35d1.dtsi"
 
 / {
 	model = "MYIR MA35D1";
@@ -174,7 +174,9 @@
 };
 
 &qspi0 {
-	status = "disabled";
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_qspi0>;
 };
 
 &eadc0 {
@@ -258,6 +260,18 @@
 				<SYS_GPJ_MFPH_PJ9MFP_eMMC1_DAT1	&pcfg_sdhci_drive1_1_8V>,
 				<SYS_GPJ_MFPH_PJ10MFP_eMMC1_DAT2	&pcfg_sdhci_drive1_1_8V>,
 				<SYS_GPJ_MFPH_PJ11MFP_eMMC1_DAT3	&pcfg_sdhci_drive1_1_8V>;
+		};
+	};
+
+	qspi0 {
+		pinctrl_qspi0: qspi0grp{
+			nuvoton,pins =
+				<SYS_GPD_MFPL_PD0MFP_QSPI0_SS0		&pcfg_default>,
+				<SYS_GPD_MFPL_PD1MFP_QSPI0_CLK		&pcfg_default>,
+				<SYS_GPD_MFPL_PD2MFP_QSPI0_MOSI0	&pcfg_default>,
+				<SYS_GPD_MFPL_PD3MFP_QSPI0_MISO0	&pcfg_default>,
+				<SYS_GPD_MFPL_PD4MFP_QSPI0_MOSI1	&pcfg_default>,
+				<SYS_GPD_MFPL_PD5MFP_QSPI0_MISO1	&pcfg_default>;
 		};
 	};
 

@@ -1717,15 +1717,15 @@
 			};
 
 			timing1: 800x480 {
-				clock-frequency = <33000000>;
+				clock-frequency = <30000000>;
 				hactive = <800>;
 				vactive = <480>;
-				hsync-len = <1>;
-				hfront-porch = <210>;
-				hback-porch = <46>;
-				vsync-len = <1>;
-				vfront-porch  = <22>;
-				vback-porch = <23>;
+				hsync-len = <47>;
+				hfront-porch = <39>;
+				hback-porch = <39>;
+				vsync-len = <2>;
+				vfront-porch  = <13>;
+				vback-porch = <29>;
 				hsync-active = <1>;
 				vsync-active = <1>;
 			};

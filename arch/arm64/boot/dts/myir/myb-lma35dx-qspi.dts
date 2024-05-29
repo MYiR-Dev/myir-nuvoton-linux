@@ -5,7 +5,7 @@
  */
 
 
-#include "myb-lma35d1-base.dts"
+#include "myb-lma35dx-base.dts"
 
 / {
 	model = "MYIR MA35D1";
@@ -44,6 +44,11 @@
 	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_sdhci0>;
+};
+
+/*emmc*/
+&sdhci1 {
+	status = "disabled";
 };
 
 &qspi0 {

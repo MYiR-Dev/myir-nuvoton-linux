@@ -6,7 +6,7 @@
 
 /dts-v1/;
 
-#include "ma35d1.dtsi"
+#include "myt-lma35dx-base.dts"
 
 / {
 	model = "MYIR MA35D1";
@@ -160,6 +160,11 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_sdhci0>;
 	wp-gpios = <&gpioc 7 GPIO_ACTIVE_LOW>;
+};
+
+/*eMMC*/
+&sdhci1 {
+	status = "disabled";
 };
 
 &eadc0 {
