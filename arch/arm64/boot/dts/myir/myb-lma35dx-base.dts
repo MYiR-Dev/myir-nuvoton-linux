@@ -362,6 +362,7 @@
 		port {
 			ov5640_0: endpoint {
 				remote-endpoint = <&ccap0_1>;
+				bus-width = <8>;
 				hsync-active = <0>;     /* Active low */
 				vsync-active = <0>;     /* Active low */
 				pclk-sample = <1>;      /* Rising */
