@@ -330,6 +330,7 @@
 		clock-names = "xvclk";
 		powerdown-gpios = <&gpiom 10 (GPIO_ACTIVE_HIGH | GPIO_PUSH_PULL)>;
 		reset-gpios = <&gpiom 11 (GPIO_ACTIVE_LOW | GPIO_PUSH_PULL)>;
+
 		status = "okay";
 		port {
 			ov2659_0: endpoint {
@@ -352,11 +353,8 @@
 		pinctrl-0 = <&pinctrl_ccap0>;
 		clocks = <&clk CCAP0_GATE>;
 		clock-names = "xclk";
-		// powerdown-gpios = <&gpiom 10 (GPIO_ACTIVE_HIGH | GPIO_PUSH_PULL)>;
-		// reset-gpios = <&gpiom 11 (GPIO_ACTIVE_LOW | GPIO_PUSH_PULL)>;
-
-		powerdown-gpios = <&gpiom 3 (GPIO_ACTIVE_HIGH | GPIO_PUSH_PULL)>;
-		reset-gpios = <&gpiom 2 (GPIO_ACTIVE_LOW | GPIO_PUSH_PULL)>;
+		powerdown-gpios = <&gpiom 10 (GPIO_ACTIVE_HIGH | GPIO_PUSH_PULL)>;
+		reset-gpios = <&gpiom 11 (GPIO_ACTIVE_LOW | GPIO_PUSH_PULL)>;
 
 		status = "okay";
 		port {
@@ -763,16 +761,16 @@
 				<SYS_GPK_MFPH_PK10MFP_CCAP0_PIXCLK	&pcfg_default>,
 				<SYS_GPK_MFPH_PK11MFP_CCAP0_HSYNC	&pcfg_default>,
 				<SYS_GPM_MFPL_PM0MFP_CCAP0_VSYNC	&pcfg_default>,
-				// <SYS_GPM_MFPL_PM2MFP_CCAP0_DATA0	&pcfg_default>,
-				// <SYS_GPM_MFPL_PM3MFP_CCAP0_DATA1	&pcfg_default>,
+				<SYS_GPM_MFPL_PM2MFP_CCAP0_DATA0	&pcfg_default>,
+				<SYS_GPM_MFPL_PM3MFP_CCAP0_DATA1	&pcfg_default>,
 				<SYS_GPM_MFPL_PM4MFP_CCAP0_DATA2	&pcfg_default>,
 				<SYS_GPM_MFPL_PM5MFP_CCAP0_DATA3	&pcfg_default>,
 				<SYS_GPM_MFPL_PM6MFP_CCAP0_DATA4	&pcfg_default>,
 				<SYS_GPM_MFPL_PM7MFP_CCAP0_DATA5	&pcfg_default>,
 				<SYS_GPM_MFPH_PM8MFP_CCAP0_DATA6	&pcfg_default>,
-				<SYS_GPM_MFPH_PM9MFP_CCAP0_DATA7	&pcfg_default>,
-				<SYS_GPM_MFPH_PM10MFP_CCAP0_DATA8	&pcfg_default>,
-				<SYS_GPM_MFPH_PM11MFP_CCAP0_DATA9	&pcfg_default>;
+				<SYS_GPM_MFPH_PM9MFP_CCAP0_DATA7	&pcfg_default>;
+				// <SYS_GPM_MFPH_PM10MFP_CCAP0_DATA8	&pcfg_default>,
+				// <SYS_GPM_MFPH_PM11MFP_CCAP0_DATA9	&pcfg_default>;
 		};
 	};
 
