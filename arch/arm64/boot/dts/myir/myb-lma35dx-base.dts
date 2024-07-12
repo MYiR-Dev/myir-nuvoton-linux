@@ -226,18 +226,12 @@
 	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_gmac0>;
-	phy-reset-duration = <20>;
-	phy-reset-post-delay=<20>;
-	phy-reset-gpios = <&gpiof 14 GPIO_ACTIVE_HIGH>;
 };
 
 &gmac1 {
 	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_gmac1>;
-	phy-reset-duration = <20>;
-	phy-reset-post-delay=<20>;
-	phy-reset-gpios = <&gpiol 5 GPIO_ACTIVE_HIGH>;
 };
 
 &ehci0 {
