@@ -1,0 +1,272 @@
+/*
+ * Device Tree Source for MA35D1 
+ * Copyright (C) 2024 MYIR
+ *
+ */
+
+/dts-v1/;
+
+#include "myt-lma35dx-base-512m.dts"
+
+/ {
+	model = "MYIR MA35D1";
+
+	chosen {
+		bootargs = "root=/dev/mmcblk0p1 rootfstype=ext4 rw rootwait console=ttyS0,115200n8 rdinit=/sbin/init mem=512M";
+	};
+
+	reserved-memory {
+		vc8k_buf: vc8k_buf@0 {
+			reg = <0x0 0x8A800000 0x0 0x2000000>; /* 32MiB */
+			no-map;
+		};
+		gc520l_buf: gc520l_buf@0 {
+			reg = <0x0 0x8A000000 0x0 0x800000>; /* 8MiB */
+			no-map;
+		};
+		rproc_buf: rproc_buf@0 {
+			reg = <0x0 0x80020000 0x0 0x60000>; /* 384KB */
+			no-map;
+		};
+	};
+
+	regulators {
+			compatible = "simple-bus";
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+		reg_m2_power_pad: regulator1 {
+			compatible = "regulator-fixed";
+			regulator-name = "fixed-3.3V";
+			regulator-min-microvolt = <3300000>;
+			regulator-max-microvolt = <3300000>;
+			regulator-boot-on;
+			regulator-always-on;
+			enable-active-high;
+			// gpios = <&gpiob 8 GPIO_ACTIVE_HIGH>;
+		};
+
+	};
+
+	reg_3p3v: regulator1 {
+		compatible = "regulator-fixed";
+		regulator-name = "fixed-3.3V";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-boot-on;
+		regulator-always-on;
+	};
+
+	reg_1p8v: regulator0 {
+		compatible = "regulator-fixed";
+		regulator-name = "fixed-1.8V";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		regulator-boot-on;
+		regulator-always-on;
+	};
+
+	watchdog: watchdog {
+		// SGM823
+		compatible = "linux,wdt-gpio";
+		gpios = <&gpiol 13 GPIO_ACTIVE_LOW>;
+		hw_algo = "toggle";
+		// always-running;
+		hw_margin_ms = <1600>;
+	};
+
+	gpio_leds_test {
+		compatible = "gpio-leds";
+		status = "okay";
+		led0 {
+			label = "LED-Blue";
+			gpios = <&gpiol 15 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+			linux,default-trigger = "heartbeat";
+		};
+	};
+
+	volt0_sdhci1: regulator-volt0_sdhci1 {
+		compatible = "nuvoton,ma35d1-volt";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-name = "volt0_sdhci1";
+		regulator-always-on;
+    };
+};
+
+&mem {
+	device_type = "memory";
+	// reg = <0x00000000 0x80000000 0 0x10000000>; /* DRAM space - 1, size : 256MB DRAM */
+	reg = <0x00000000 0x80000000 0 0x20000000>; /* DRAM space - 2, size : 512MB DRAM */
+};
+
+&i2c3 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_i2c3>;
+
+	EEPROM:24C32F@50 {
+		status = "okay";
+		compatible = "atmel,24c32";
+		reg = <0x50>;
+		pagesize = <64>;
+	};
+
+	ptn5150: ptn5150@3d {
+		status = "okay";
+		compatible = "nxp,ptn5150";
+		reg = <0x3d>;
+		pinctrl-names = "default";
+		int-gpios = <&gpiok 5 GPIO_ACTIVE_HIGH>;
+
+		connector {
+			compatible = "usb-c-connector";
+			label = "USB-C";
+			port {
+				con_usbotg_hs_ep: endpoint {
+					remote-endpoint = <&usbotg_hs_ep>;
+				};
+			};
+		};
+	};
+};
+
+&ehci0 {
+	// pinctrl-names = "default";
+	// pinctrl-0 = <&pinctrl_hsusbh>;
+	oc-active-level = <1>;
+	status = "okay";
+};
+
+&ehci1 {
+   status = "okay";
+   oc-active-level = <1>;
+};
+
+&usb {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_usb>;
+	dr_mode = "otg";
+	port {
+		usbotg_hs_ep: endpoint {
+			remote-endpoint = <&con_usbotg_hs_ep>;
+		};
+	};
+};
+
+/* SD */
+&sdhci0 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_sdhci0>;
+	wp-gpios = <&gpioc 7 GPIO_ACTIVE_LOW>;
+};
+
+/*eMMC*/
+&sdhci1 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_sdhci1_1_8V>;
+	max-frequency = <200000000>;
+	bus-width = <8>;
+	// no-1-8-v;
+	non-removable;
+};
+
+&qspi0 {
+	status = "disabled";
+};
+
+&eadc0 {
+	status = "okay";
+};
+
+&vc8k {
+	memory-region = <&vc8k_buf>;
+	status = "okay";
+};
+
+&gc520l {
+	memory-region = <&gc520l_buf>;
+	status = "okay";
+};
+
+&uart16 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart16>;
+};
+
+&pinctrl {
+	i2c3 {
+		pinctrl_i2c3: i2c3grp{
+			nuvoton,pins =
+				<SYS_GPB_MFPH_PB12MFP_I2C3_SDA	&pcfg_default>,
+				<SYS_GPB_MFPH_PB13MFP_I2C3_SCL	&pcfg_default>;
+		};
+	};
+
+	usb {
+		pinctrl_usb: usbgrp{
+			nuvoton,pins =
+				<SYS_GPF_MFPH_PF15MFP_HSUSB0_VBUSVLD	&pcfg_default>;
+		};
+	};
+
+	sdhci0 {
+		pinctrl_sdhci0: sdhci0grp{
+			nuvoton,pins =
+				<SYS_GPC_MFPL_PC0MFP_eMMC0_CMD	&pcfg_sdhci_drive2_3_3V>,
+				<SYS_GPC_MFPL_PC1MFP_eMMC0_CLK	&pcfg_sdhci_drive2_3_3V>,
+				<SYS_GPC_MFPL_PC2MFP_eMMC0_DAT0	&pcfg_sdhci_drive2_3_3V>,
+				<SYS_GPC_MFPL_PC3MFP_eMMC0_DAT1	&pcfg_sdhci_drive2_3_3V>,
+				<SYS_GPC_MFPL_PC4MFP_eMMC0_DAT2	&pcfg_sdhci_drive2_3_3V>,
+				<SYS_GPC_MFPL_PC5MFP_eMMC0_DAT3	&pcfg_sdhci_drive2_3_3V>,
+				<SYS_GPC_MFPL_PC6MFP_SD0_nCD	&pcfg_default>,
+				<SYS_GPC_MFPL_PC7MFP_SD0_WP	&pcfg_default>;
+		};
+	};
+
+	sdhci1 {
+		pinctrl_sdhci1_3_3V: sdhci1_3_3Vgrp{
+			nuvoton,pins =
+				<SYS_GPJ_MFPL_PJ0MFP_eMMC1_DAT4	&pcfg_sdhci_drive2_3_3V>,
+				<SYS_GPJ_MFPL_PJ1MFP_eMMC1_DAT5	&pcfg_sdhci_drive2_3_3V>,
+				<SYS_GPJ_MFPL_PJ2MFP_eMMC1_DAT6	&pcfg_sdhci_drive2_3_3V>,
+				<SYS_GPJ_MFPL_PJ3MFP_eMMC1_DAT7	&pcfg_sdhci_drive2_3_3V>,
+				// <SYS_GPJ_MFPL_PJ4MFP_SD1_WP	&pcfg_default>,
+				// <SYS_GPJ_MFPL_PJ5MFP_SD1_nCD	&pcfg_default>,
+				<SYS_GPJ_MFPL_PJ6MFP_eMMC1_CMD	&pcfg_sdhci_drive2_3_3V>,
+				<SYS_GPJ_MFPL_PJ7MFP_eMMC1_CLK	&pcfg_sdhci_drive2_3_3V>,
+				<SYS_GPJ_MFPH_PJ8MFP_eMMC1_DAT0	&pcfg_sdhci_drive2_3_3V>,
+				<SYS_GPJ_MFPH_PJ9MFP_eMMC1_DAT1	&pcfg_sdhci_drive2_3_3V>,
+				<SYS_GPJ_MFPH_PJ10MFP_eMMC1_DAT2	&pcfg_sdhci_drive2_3_3V>,
+				<SYS_GPJ_MFPH_PJ11MFP_eMMC1_DAT3	&pcfg_sdhci_drive2_3_3V>;
+		};
+
+		pinctrl_sdhci1_1_8V: sdhci1_1_8Vgrp{
+			nuvoton,pins =
+				<SYS_GPJ_MFPL_PJ0MFP_eMMC1_DAT4	&pcfg_sdhci_drive1_1_8V>,
+				<SYS_GPJ_MFPL_PJ1MFP_eMMC1_DAT5	&pcfg_sdhci_drive1_1_8V>,
+				<SYS_GPJ_MFPL_PJ2MFP_eMMC1_DAT6	&pcfg_sdhci_drive1_1_8V>,
+				<SYS_GPJ_MFPL_PJ3MFP_eMMC1_DAT7	&pcfg_sdhci_drive1_1_8V>,
+				/* <SYS_GPJ_MFPL_PJ4MFP_SD1_WP	&pcfg_default>, */
+				/* <SYS_GPJ_MFPL_PJ5MFP_SD1_nCD	&pcfg_default>, */
+				<SYS_GPJ_MFPL_PJ6MFP_eMMC1_CMD	&pcfg_sdhci_drive4_1_8V>,
+				<SYS_GPJ_MFPL_PJ7MFP_eMMC1_CLK	&pcfg_sdhci_drive7_1_8V>,
+				<SYS_GPJ_MFPH_PJ8MFP_eMMC1_DAT0	&pcfg_sdhci_drive1_1_8V>,
+				<SYS_GPJ_MFPH_PJ9MFP_eMMC1_DAT1	&pcfg_sdhci_drive1_1_8V>,
+				<SYS_GPJ_MFPH_PJ10MFP_eMMC1_DAT2	&pcfg_sdhci_drive1_1_8V>,
+				<SYS_GPJ_MFPH_PJ11MFP_eMMC1_DAT3	&pcfg_sdhci_drive1_1_8V>;
+		};
+	};
+
+	uart16 {
+		pinctrl_uart16: uart16grp{
+			nuvoton,pins =
+				<SYS_GPD_MFPH_PD10MFP_UART16_RXD		&pcfg_default>,
+				<SYS_GPD_MFPH_PD11MFP_UART16_TXD		&pcfg_default>;
+		};
+	};
+};

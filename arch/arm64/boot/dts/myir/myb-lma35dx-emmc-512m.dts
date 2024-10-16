@@ -1,0 +1,64 @@
+/*
+ * Device Tree Source for MA35D1 
+ * Copyright (C) 2024 MYIR
+ *
+ */
+
+
+#include "myb-lma35dx-base-512m.dts"
+
+/ {
+	model = "MYIR MA35D1";
+
+	chosen {
+		bootargs = "root=/dev/mmcblk0p1 rootfstype=ext4 rw rootwait console=ttyS0,115200n8 rdinit=/sbin/init mem=512M";
+	};
+
+	reserved-memory {
+		display_buf: display_buf@0 {
+			reg = <0x0 0x8C800000 0x0 0x3000000>; /* 48MiB */
+			no-map;
+		};
+		vc8k_buf: vc8k_buf@0 {
+			reg = <0x0 0x8A800000 0x0 0x2000000>; /* 32MiB */
+			no-map;
+		};
+		gc520l_buf: gc520l_buf@0 {
+			reg = <0x0 0x8A000000 0x0 0x800000>; /* 8MiB */
+			no-map;
+		};
+		rproc_buf: rproc_buf@0 {
+			reg = <0x0 0x80020000 0x0 0x60000>; /* 384KB */
+			no-map;
+		};
+	};
+
+};
+
+&mem {
+	device_type = "memory";
+	// reg = <0x00000000 0x80000000 0 0x10000000>; /* DRAM space - 1, size : 256MB DRAM */
+	reg = <0x00000000 0x80000000 0 0x20000000>; /* DRAM space - 2, size : 512MB DRAM */
+};
+
+/* SD */
+&sdhci0 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_sdhci0>;
+};
+
+/*emmc*/
+&sdhci1 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_sdhci1_1_8V>;
+	max-frequency = <200000000>;
+	bus-width = <8>;
+	// no-1-8-v;
+	non-removable;
+};
+
+&qspi0 {
+	status = "disabled";
+};
