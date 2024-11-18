@@ -112,6 +112,7 @@
 #define I2C_GCMODE_ENABLE   1
 #define I2C_GCMODE_DISABLE  0
 
+int timeout=6;
 /* i2c controller private data */
 
 struct ma35d1_i2c {
@@ -352,10 +353,10 @@ static void i2c_ma35d1_irq_master_TRx(struct ma35d1_i2c *i2c,
 									unsigned long iicstat)
 {
 	unsigned char byte;
+	u8 value;
 
 	if (iicstat == M_START) {
 		/* START has been transmitted and prepare SLA+W */
-
 		if (i2c->msg->flags & I2C_M_RD)
 			/* Write SLA+R to Register I2CDAT */
 			writel((((i2c->msg->addr & 0x7f) << 1)|0x1), (i2c->regs+DAT));
@@ -369,7 +370,6 @@ static void i2c_ma35d1_irq_master_TRx(struct ma35d1_i2c *i2c,
 	} else if ((iicstat == M_TRAN_ADDR_ACK) ||
 				(iicstat == M_TRAN_DATA_ACK)) {
 		/* SLA+W has been transmitted and ACK has been received */
-
 		if (iicstat == M_TRAN_ADDR_ACK) {
 			if (is_lastmsg(i2c) && i2c->msg->len == 0) {
 				ma35d1_i2c_stop(i2c, 0);
@@ -406,9 +406,10 @@ static void i2c_ma35d1_irq_master_TRx(struct ma35d1_i2c *i2c,
 		/* Master Transmit Address NACK */
 		/* 0x20: SLA+W has been transmitted and NACK has been received */
 		/* 0x48: SLA+R has been transmitted and NACK has been received */
-
-		if (!(i2c->msg->flags & I2C_M_IGNORE_NAK)) {
-			dev_err(i2c->dev, "\n i2c: ack was not received\n");
+		timeout--;
+		if ((timeout<0) || (!(i2c->msg->flags & I2C_M_IGNORE_NAK))) {
+			timeout=6;
+			//dev_err(i2c->dev, "\n i2c: ack was not received\n");
 			ma35d1_i2c_stop(i2c, -ENXIO);
 		}
 	} else if (iicstat == M_REPEAT_START) {
@@ -483,6 +484,7 @@ static void i2c_ma35d1_irq_master_TRx(struct ma35d1_i2c *i2c,
 		ma35d1_i2c_disable_irq(i2c);
 		ma35d1_i2c_stop(i2c, 0);
 	}
+//	return 0;
 
 }
 
@@ -521,11 +523,12 @@ static irqreturn_t ma35d1_i2c_irq(int irqno, void *dev_id)
 
 	if (i2c->slave_mode)
 		I2C_SlaveTRx(i2c, status);
-	else
+	else 
 		i2c_ma35d1_irq_master_TRx(i2c, status);
 
 out:
 	return IRQ_HANDLED;
+	//return IRQ_NONE;
 }
 
 /* ma35d1_i2c_doxfer
@@ -773,6 +776,7 @@ static int ma35d1_i2c_probe(struct platform_device *pdev)
 
 	ret = request_irq(i2c->irq, ma35d1_i2c_irq,
 					IRQF_SHARED, dev_name(&pdev->dev), i2c);
+	printk("ret=%d\n",ret);
 
 	if (ret != 0) {
 		dev_err(&pdev->dev, "cannot claim IRQ %d\n", i2c->irq);

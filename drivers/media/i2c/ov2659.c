@@ -1271,7 +1271,7 @@ static int ov2659_power_off(struct device *dev)
 
 	gpiod_set_value(ov2659->pwdn_gpio, 1);
 
-	clk_disable_unprepare(ov2659->clk);
+//	clk_disable_unprepare(ov2659->clk);
 
 	return 0;
 }
@@ -1360,7 +1360,6 @@ static int ov2659_detect(struct v4l2_subdev *sd)
 	int ret;
 
 	dev_dbg(&client->dev, "%s:\n", __func__);
-
 	ret = ov2659_write(client, REG_SOFTWARE_RESET, 0x01);
 	if (ret != 0) {
 		dev_err(&client->dev, "Sensor soft reset failed\n");
@@ -1386,7 +1385,6 @@ static int ov2659_detect(struct v4l2_subdev *sd)
 			dev_info(&client->dev, "Found OV%04X sensor\n", id);
 		}
 	}
-
 	return ret;
 }
 

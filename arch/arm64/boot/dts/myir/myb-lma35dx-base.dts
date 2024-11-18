@@ -9,7 +9,7 @@
 #include "ma35d1.dtsi"
 
 
-#define OV2659_SUPPORT           0
+#define OV2659_SUPPORT           1
 
 / {
 	model = "MYIR MA35D1";
@@ -169,7 +169,7 @@
 #endif
 					bus-width = <8>;
 					hsync-active = <0>;     /* Active low */
-					vsync-active = <0>;     /* Active high */
+					vsync-active = <1>;     /* Active high */
 					pclk-sample = <1>;      /* Rising */
 			};
 	};
@@ -226,12 +226,21 @@
 	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_gmac0>;
+	/*phy-reset-duration = <20>;
+	phy-reset-post-delay=<20>;
+	phy-reset-gpios = <&gpiof 14 GPIO_ACTIVE_HIGH>;
+	*/
 };
 
 &gmac1 {
 	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_gmac1>;
+	/*
+	phy-reset-duration = <20>;
+	phy-reset-post-delay=<20>;
+	phy-reset-gpios = <&gpiol 5 GPIO_ACTIVE_HIGH>;
+	*/
 };
 
 &ehci0 {
@@ -331,8 +340,8 @@
 				remote-endpoint = <&ccap0_1>;
 				bus-width = <8>;
 				data-shift = <2>; /* lines 9:2 are used */
-				hsync-active = <1>;
-				vsync-active = <0>;
+				hsync-active = <0>;
+				vsync-active = <1>;
 				pclk-sample = <1>;
 				link-frequencies = /bits/ 64 <70000000>;
 				pclk-max-frequency = <12000000>;
@@ -356,7 +365,7 @@
 				remote-endpoint = <&ccap0_1>;
 				bus-width = <8>;
 				hsync-active = <0>;     /* Active low */
-				vsync-active = <0>;     /* Active low */
+				vsync-active = <1>;     /* Active low */
 				pclk-sample = <1>;      /* Rising */
 				link-frequencies = /bits/ 64 <70000000>;
 			};
@@ -762,9 +771,9 @@
 				<SYS_GPM_MFPL_PM6MFP_CCAP0_DATA4	&pcfg_default>,
 				<SYS_GPM_MFPL_PM7MFP_CCAP0_DATA5	&pcfg_default>,
 				<SYS_GPM_MFPH_PM8MFP_CCAP0_DATA6	&pcfg_default>,
-				<SYS_GPM_MFPH_PM9MFP_CCAP0_DATA7	&pcfg_default>;
-				// <SYS_GPM_MFPH_PM10MFP_CCAP0_DATA8	&pcfg_default>,
-				// <SYS_GPM_MFPH_PM11MFP_CCAP0_DATA9	&pcfg_default>;
+				<SYS_GPM_MFPH_PM9MFP_CCAP0_DATA7    &pcfg_default>,
+				<SYS_GPM_MFPH_PM10MFP_GPIO			&pcfg_default>,
+				<SYS_GPM_MFPH_PM11MFP_GPIO			&pcfg_default>;
 		};
 	};
 
